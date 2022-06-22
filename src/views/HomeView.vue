@@ -1,5 +1,7 @@
 <template>
-	<main v-if="!loading" class="home">show data</main>
+	<main v-if="!loading" class="home">
+		<DataTitle :text="title" :dataDate="dataDate" />
+	</main>
 	<main v-else class="flex flex-col align-center justify-center text-center">
 		<div class="text-gray-500 text-3xl mt-10 mb-6">Fetching Data</div>
 		<img :src="loadingImage" alt="loading" class="w-24 m-auto" />
@@ -8,15 +10,16 @@
 
 <script>
 // @ is an alias to /src
+import DataTitle from '@/components/DataTitle'
 
 export default {
 	name: 'HomeView',
-	components: {},
+	components: { DataTitle },
 	data() {
 		return {
 			loading: true,
 			title: 'Global',
-			dataData: '',
+			dataDate: '',
 			status: {},
 			countries: [],
 			loadingImage: require('../assets/spinning-loading.gif'),

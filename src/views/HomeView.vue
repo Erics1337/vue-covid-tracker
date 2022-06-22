@@ -1,6 +1,7 @@
 <template>
 	<main v-if="!loading" class="home">
 		<DataTitle :text="title" :dataDate="dataDate" />
+		<DataBoxes :stats="stats" />
 	</main>
 	<main v-else class="flex flex-col align-center justify-center text-center">
 		<div class="text-gray-500 text-3xl mt-10 mb-6">Fetching Data</div>
@@ -11,10 +12,11 @@
 <script>
 // @ is an alias to /src
 import DataTitle from '@/components/DataTitle'
+import DataBoxes from '@/components/DataBoxes'
 
 export default {
 	name: 'HomeView',
-	components: { DataTitle },
+	components: { DataTitle, DataBoxes },
 	data() {
 		return {
 			loading: true,
@@ -27,7 +29,7 @@ export default {
 	},
 	methods: {
 		async fetchCovidData() {
-			const response = await fetch('https://covid19api.com/summary')
+			const response = await fetch('https://api.covid19api.com/summary')
 			const data = await response.json()
 			return data
 		},
